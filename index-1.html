@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' blob: data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'none'">
+<title>ألبوماتي</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#161a23;--mu:#6b7280;--ac:#4f46e5;--ln:#e5e7eb;--dg:#dc2626}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1117;--card:#1a1d27;--tx:#eef0f6;--mu:#9aa1b2;--ac:#818cf8;--ln:#2a2e3b;--dg:#f87171}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px system-ui,sans-serif;padding-top:env(safe-area-inset-top)}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:6px;padding:12px 14px;background:var(--bg)}
+h1{flex:1;margin:0;font-size:22px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#acts{display:flex;gap:6px}
+.ib{border:0;background:var(--card);color:var(--tx);width:40px;height:40px;border-radius:12px;font-size:18px;box-shadow:0 1px 3px #0002}
+#q{display:block;width:calc(100% - 28px);margin:0 14px 12px;padding:12px 16px;border:1px solid var(--ln);border-radius:14px;background:var(--card);color:var(--tx);font:inherit}
+main{padding:0 14px 110px}
+.albums{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 2px 8px #0001}
+.card img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.ph{width:100%;aspect-ratio:1;display:grid;place-items:center;font-size:40px;background:var(--ln)}
+.nm{padding:10px 12px 0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ct{padding:2px 12px 12px;color:var(--mu);font-size:13px}
+h2{font-size:15px;color:var(--mu);margin:20px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.th{position:relative;aspect-ratio:1;background:var(--ln);overflow:hidden}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
+.th.on::after{content:'✓';position:absolute;inset:0;background:#4f46e5aa;color:#fff;font-size:30px;display:grid;place-items:center}
+.empty{text-align:center;color:var(--mu);padding:60px 20px;line-height:1.9;white-space:pre-line}
+#fab{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom));width:60px;height:60px;border:0;border-radius:20px;background:var(--ac);color:#fff;font-size:30px;box-shadow:0 6px 16px #4f46e566;z-index:6}
+#sbar{position:fixed;inset:auto 0 0 0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));background:var(--card);display:flex;gap:8px;align-items:center;z-index:7;box-shadow:0 -2px 10px #0002}
+#sbar span{flex:1}
+.t{border:0;background:var(--ln);color:var(--tx);padding:10px 14px;border-radius:12px;font:inherit}
+.t.dg{color:var(--dg)}
+#viewer{position:fixed;inset:0;background:#000;z-index:20;display:flex;flex-direction:column;color:#fff}
+.vt,.vb{display:flex;align-items:center;gap:8px;padding:12px 14px}
+.vt{padding-top:calc(12px + env(safe-area-inset-top))}
+.vb{justify-content:center;padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+#vn{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.85}
+.vm{flex:1;position:relative;min-height:0}
+#vimg{width:100%;height:100%;object-fit:contain}
+#viewer .ib,#viewer .t{background:#ffffff26;color:#fff;box-shadow:none}
+#viewer .t.dg{color:#f87171}
+.nv{position:absolute;top:50%;transform:translateY(-50%);border:0;background:#0007;color:#fff;width:44px;height:44px;border-radius:50%;font-size:22px}
+#nx{left:8px}#pv{right:8px}
+.mask{position:fixed;inset:0;background:#0008;z-index:30;display:flex;align-items:flex-end}
+.sheet{background:var(--card);color:var(--tx);width:100%;border-radius:22px 22px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom));max-height:80vh;overflow:auto}
+.sheet h3{margin:0 0 14px;font-size:17px}
+.in{width:100%;padding:12px;border:1px solid var(--ln);border-radius:12px;background:var(--bg);color:var(--tx);font:inherit;margin-bottom:14px}
+.row{display:block;width:100%;text-align:start;border:0;border-bottom:1px solid var(--ln);background:none;color:var(--tx);font:inherit;padding:14px 4px}
+.btns{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+.btns button{border:0;border-radius:12px;padding:11px 20px;font:inherit;background:var(--ln);color:var(--tx)}
+.btns .pr{background:var(--ac);color:#fff}.btns .dg{background:var(--dg);color:#fff}
+#toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:10px 18px;border-radius:20px;z-index:40;font-size:14px}
+</style>
+</head>
+<body>
+<header><button class="ib" id="back" hidden>›</button><h1 id="ttl">ألبوماتي</h1><div id="acts"></div></header>
+<input id="q" type="search">
+<main id="main"></main>
+<button id="fab">＋</button>
+<div id="sbar" hidden></div>
+<input id="file" type="file" accept="image/*" multiple hidden>
+<div id="toast" hidden></div>
+<div id="viewer" hidden>
+  <div class="vt"><button class="ib" id="vc">✕</button><span id="vn"></span></div>
+  <div class="vm" id="vm"><img id="vimg" alt=""><button class="nv" id="nx">‹</button><button class="nv" id="pv">›</button></div>
+  <div class="vb"><button class="t" id="vcv">غلاف</button><button class="t" id="vmv">نقل</button><button class="t dg" id="vdl">حذف</button></div>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const h=(t,a={},...k)=>{const e=document.createElement(t);for(const x in a){const v=a[x];x=='class'?e.className=v:x.startsWith('on')?e[x]=v:e.setAttribute(x,v)}e.append(...k.flat().filter(Boolean));return e};
+const fill=(e,...k)=>e.replaceChildren(...k.flat().filter(Boolean));
+let db,A=[],P=[],sel=null,view=null,urls=[],vurl,cur=null,lh=location.hash,rt,tt;
+const rq=r=>new Promise((o,e)=>{r.onsuccess=()=>o(r.result);r.onerror=()=>e(r.error)});
+const done=t=>new Promise((o,e)=>{t.oncomplete=o;t.onerror=t.onabort=()=>e(t.error)});
+const st=(n,m)=>db.transaction(n,m).objectStore(n);
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const u=b=>{const x=URL.createObjectURL(b);urls.push(x);return x};
+const ib=(t,f)=>h('button',{class:'ib',onclick:f},t);
+const tb=(t,f,c='')=>h('button',{class:'t '+c,onclick:f},t);
+function toast(m,ms=2200){const e=$('#toast');e.textContent=m;e.hidden=false;clearTimeout(tt);if(ms)tt=setTimeout(()=>e.hidden=true,ms)}
+function init(){return new Promise((o,e)=>{const r=indexedDB.open('albumaty',1);r.onupgradeneeded=()=>['albums','photos','full'].forEach(n=>r.result.createObjectStore(n,{keyPath:'id'}));r.onsuccess=()=>{db=r.result;o()};r.onerror=()=>e(r.error)})}
+function dlg(title,o={}){return new Promise(res=>{
+  const m=h('div',{class:'mask'}),box=h('div',{class:'sheet'},h('h3',{},title));
+  const fin=v=>{m.remove();res(v)};
+  let inp=null;
+  if(o.input!=null){inp=h('input',{class:'in',value:o.input,maxlength:60});box.append(inp)}
+  (o.items||[]).forEach(([t,v])=>box.append(h('button',{class:'row',onclick:()=>fin(v)},t)));
+  box.append(h('div',{class:'btns'},h('button',{onclick:()=>fin(null)},'إلغاء'),o.items?null:h('button',{class:o.danger?'dg':'pr',onclick:()=>fin(inp?(inp.value.trim()||null):true)},o.ok||'موافق')));
+  m.onclick=e=>{if(e.target==m)fin(null)};m.append(box);document.body.append(m);inp&&inp.focus()})}
+
+async function load(){[A,P]=await Promise.all([rq(st('albums').getAll()),rq(st('photos').getAll())])}
+const render=async()=>{await load();draw()};
+const card=a=>{const ph=P.find(p=>p.id==a.cover&&p.albumId==a.id)||P.find(p=>p.albumId==a.id),n=P.filter(p=>p.albumId==a.id).length;
+  return h('div',{class:'card',onclick:()=>{location.hash='#/a/'+a.id}},ph?h('img',{src:u(ph.thumb)}):h('div',{class:'ph'},'🖼️'),h('div',{class:'nm'},a.name),h('div',{class:'ct'},n+' صورة'))};
+const grid=ps=>h('div',{class:'grid'},ps.map((p,i)=>{const d=h('div',{class:'th'+(sel&&sel.has(p.id)?' on':'')},h('img',{src:u(p.thumb),loading:'lazy'}));
+  d.onclick=()=>{if(sel){sel.has(p.id)?sel.delete(p.id):sel.add(p.id);d.classList.toggle('on');bar()}else openV(ps,i)};return d}));
+function draw(){
+  urls.forEach(x=>URL.revokeObjectURL(x));urls=[];
+  const [,r,id]=location.hash.slice(1).split('/'),s=$('#q').value.trim().toLowerCase(),has=n=>n.toLowerCase().includes(s),m=$('#main');
+  cur=r=='a'?A.find(a=>a.id==id)||null:null;
+  if(r=='a'&&!cur)history.replaceState(null,'','#/');
+  $('#back').hidden=!cur;$('#ttl').textContent=cur?cur.name:'ألبوماتي';
+  fill($('#acts'),cur&&!sel?[ib('✎',rename),ib('☑',startSel),ib('🗑',delAlbum)]:[]);
+  $('#fab').hidden=!!sel;$('#fab').onclick=cur?()=>$('#file').click():newAlbum;
+  $('#q').placeholder=cur?'ابحث في صور الألبوم…':'ابحث عن ألبوم أو صورة…';
+  if(cur){
+    const ps=P.filter(p=>p.albumId==cur.id&&has(p.name)).sort((a,b)=>a.added-b.added);
+    fill(m,ps.length?grid(ps):h('div',{class:'empty'},s?'لا توجد نتائج':'الألبوم فارغ.\nاضغط ＋ لإضافة صور من المعرض'));
+  }else{
+    const as=A.filter(a=>has(a.name)).sort((a,b)=>b.created-a.created),ps=s?P.filter(p=>has(p.name)):[];
+    fill(m,as.length?h('div',{class:'albums'},as.map(card)):null,ps.length?h('h2',{},'صور'):null,ps.length?grid(ps):null,
+      !as.length&&!ps.length?h('div',{class:'empty'},s?'لا توجد نتائج':'لا توجد ألبومات بعد.\nاضغط ＋ لإنشاء أول ألبوم'):null);
+  }
+  bar();
+}
+async function newAlbum(){const n=await dlg('ألبوم جديد',{input:'',ok:'إنشاء'});if(!n)return;const a={id:uid(),name:n,created:Date.now()};await rq(st('albums','readwrite').put(a));location.hash='#/a/'+a.id}
+async function rename(){const n=await dlg('تغيير اسم الألبوم',{input:cur.name,ok:'حفظ'});if(!n)return;cur.name=n;await rq(st('albums','readwrite').put(cur));render()}
+async function delAlbum(){if(!await dlg('حذف الألبوم «'+cur.name+'» مع كل صوره؟',{ok:'حذف',danger:1}))return;await rm(P.filter(p=>p.albumId==cur.id).map(p=>p.id));await rq(st('albums','readwrite').delete(cur.id));location.hash='#/'}
+async function rm(ids){const t=db.transaction(['photos','full'],'readwrite');ids.forEach(i=>{t.objectStore('photos').delete(i);t.objectStore('full').delete(i)});await done(t)}
+async function mv(ps){
+  const same=ps.every(p=>p.albumId==ps[0].albumId);
+  let to=await dlg('نقل إلى',{items:[['＋ ألبوم جديد','+'],...A.filter(a=>!same||a.id!=ps[0].albumId).map(a=>[a.name,a.id])]});
+  if(!to)return false;
+  if(to=='+'){const n=await dlg('ألبوم جديد',{input:'',ok:'إنشاء'});if(!n)return false;to=uid();await rq(st('albums','readwrite').put({id:to,name:n,created:Date.now()}))}
+  const t=db.transaction('photos','readwrite');ps.forEach(p=>t.objectStore('photos').put({...p,albumId:to}));await done(t);return true}
+async function cover(p){const a=A.find(a=>a.id==p.albumId);a.cover=p.id;await rq(st('albums','readwrite').put(a));toast('تم تعيين صورة الغلاف');render()}
+
+function startSel(){sel=new Set();history.pushState({s:1},'');draw()}
+function bar(){const b=$('#sbar');b.hidden=!sel;if(!sel)return;const ps=P.filter(p=>sel.has(p.id));
+  fill(b,h('span',{},sel.size+' محددة'),
+    sel.size==1?tb('غلاف',async()=>{await cover(ps[0]);history.back()}):null,
+    sel.size?tb('نقل',async()=>{if(await mv(ps))history.back()}):null,
+    sel.size?tb('حذف',async()=>{if(await dlg('حذف '+sel.size+' صورة؟',{ok:'حذف',danger:1})){await rm(ps.map(p=>p.id));history.back()}},'dg'):null,
+    tb('إلغاء',()=>history.back()))}
+
+async function thumb(f){
+  let b;try{b=await createImageBitmap(f,{resizeWidth:360,resizeQuality:'medium'})}catch(e){b=await createImageBitmap(f)}
+  const k=Math.min(1,360/Math.max(b.width,b.height)),c=document.createElement('canvas');
+  c.width=Math.max(1,Math.round(b.width*k));c.height=Math.max(1,Math.round(b.height*k));
+  c.getContext('2d').drawImage(b,0,0,c.width,c.height);b.close();
+  const r=await new Promise(r=>c.toBlob(r,'image/jpeg',.8));c.width=c.height=0;if(!r)throw 0;return r}
+async function addPhotos(aid,fs){
+  let n=0,bad=0,i=0,last=0,wl=null;
+  try{wl=await navigator.wakeLock.request('screen')}catch(e){}
+  const msg=()=>toast('جارٍ الإضافة… '+(n+bad)+' / '+fs.length+' (لا تغلق التطبيق)',0);
+  const one=async f=>{
+    try{const id=uid(),th=await thumb(f),t=db.transaction(['photos','full'],'readwrite');
+      t.objectStore('photos').put({id,albumId:aid,name:f.name,thumb:th,added:Date.now()});
+      t.objectStore('full').put({id,blob:f});await done(t);n++}catch(e){bad++}
+    msg()};
+  const worker=async()=>{while(i<fs.length){await one(fs[i++]);if(n-last>=30){last=n;if(cur&&cur.id==aid)load().then(draw)}}};
+  msg();await Promise.all([worker(),worker()]);
+  wl&&wl.release().catch(()=>{});
+  toast('تمت إضافة '+n+' صورة'+(bad?' — تعذّرت '+bad:''),4000);render()}
+
+function openV(ps,i){view={ps,i};history.pushState({v:1},'');show()}
+async function show(){const p=view.ps[view.i];$('#viewer').hidden=false;$('#vn').textContent=(view.i+1)+' / '+view.ps.length+'  '+p.name;
+  const r=await rq(st('full').get(p.id));if(!view||view.ps[view.i]!==p||!r)return;
+  vurl&&URL.revokeObjectURL(vurl);vurl=URL.createObjectURL(r.blob);$('#vimg').src=vurl}
+const go=d=>{if(view){view.i=Math.max(0,Math.min(view.ps.length-1,view.i+d));show()}};
+const vp=()=>view.ps[view.i];
+function vdrop(){view.ps.splice(view.i,1);if(!view.ps.length)return history.back();view.i=Math.min(view.i,view.ps.length-1);show()}
+
+function sync(){view=null;sel=null;$('#viewer').hidden=true;if(location.hash!=lh){lh=location.hash;$('#q').value=''}clearTimeout(rt);rt=setTimeout(render,20)}
+addEventListener('popstate',sync);addEventListener('hashchange',sync);
+$('#q').oninput=draw;
+$('#back').onclick=()=>history.back();
+$('#file').onchange=e=>{const fs=[...e.target.files];e.target.value='';if(cur&&fs.length)addPhotos(cur.id,fs)};
+$('#vc').onclick=()=>history.back();
+$('#nx').onclick=()=>go(1);$('#pv').onclick=()=>go(-1);
+$('#vcv').onclick=()=>cover(vp());
+$('#vmv').onclick=async()=>{if(await mv([vp()])){vdrop();render()}};
+$('#vdl').onclick=async()=>{if(await dlg('حذف هذه الصورة؟',{ok:'حذف',danger:1})){await rm([vp().id]);vdrop();render()}};
+let x0=0;$('#vm').ontouchstart=e=>{x0=e.touches[0].clientX};$('#vm').ontouchend=e=>{const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(d<0?1:-1)};
+init().then(()=>{navigator.storage&&navigator.storage.persist&&navigator.storage.persist();render()}).catch(()=>{$('#main').textContent='تعذّر فتح التخزين'});
+</script>
+</body>
+</html>
